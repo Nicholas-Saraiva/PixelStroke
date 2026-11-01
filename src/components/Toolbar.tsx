@@ -9,6 +9,13 @@ interface ToolbarProps {
   onRedo: () => void
 }
 
+const TOOLS: { id: Tool; label: string; title: string }[] = [
+  { id: 'pencil', label: 'B', title: 'Pencil (B)' },
+  { id: 'eraser', label: 'E', title: 'Eraser (E)' },
+  { id: 'fill', label: 'G', title: 'Fill (G)' },
+  { id: 'eyedropper', label: 'I', title: 'Eyedropper (I)' },
+]
+
 function buttonBase(active: boolean): string {
   return `grid h-10 w-10 place-items-center rounded font-mono text-sm ${
     active
@@ -20,24 +27,18 @@ function buttonBase(active: boolean): string {
 export function Toolbar({ tool, canUndo, canRedo, onSelectTool, onUndo, onRedo }: ToolbarProps) {
   return (
     <nav className="flex w-16 flex-col items-center gap-2 border-r border-neutral-800 py-4">
-      <button
-        type="button"
-        title="Pencil (B)"
-        aria-pressed={tool === 'pencil'}
-        className={buttonBase(tool === 'pencil')}
-        onClick={() => onSelectTool('pencil')}
-      >
-        P
-      </button>
-      <button
-        type="button"
-        title="Eraser (E)"
-        aria-pressed={tool === 'eraser'}
-        className={buttonBase(tool === 'eraser')}
-        onClick={() => onSelectTool('eraser')}
-      >
-        E
-      </button>
+      {TOOLS.map((t) => (
+        <button
+          key={t.id}
+          type="button"
+          title={t.title}
+          aria-pressed={tool === t.id}
+          className={buttonBase(tool === t.id)}
+          onClick={() => onSelectTool(t.id)}
+        >
+          {t.label}
+        </button>
+      ))}
       <div className="my-1 h-px w-8 bg-neutral-800" />
       <button
         type="button"

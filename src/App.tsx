@@ -1,4 +1,5 @@
 import { CanvasViewport } from './components/CanvasViewport'
+import { PalettePanel } from './components/PalettePanel'
 import { Toolbar } from './components/Toolbar'
 import { usePixelForge } from './hooks/usePixelForge'
 
@@ -25,8 +26,8 @@ export default function App() {
           onPointerCancel={pf.onPointerCancel}
         />
       </section>
-      <aside className="w-48 border-l border-neutral-800 p-4 text-sm text-neutral-500">
-        Palette — Phase 4
+      <aside className="w-48 border-l border-neutral-800 p-3">
+        <PalettePanel color={pf.color} onSelect={pf.setColor} />
       </aside>
     </main>
   )
