@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // Sweetie-16, a 16-color retro palette (GrafxKid), as #rrggbb.
 const PALETTE = [
@@ -25,10 +25,13 @@ interface PalettePanelProps {
 
 export function PalettePanel({ color, onSelect }: PalettePanelProps) {
   const [hex, setHex] = useState(() => u32ToHex(color))
+  const [derivedColor, setDerivedColor] = useState(color)
 
-  useEffect(() => {
+  // Adjust the hex field when the color changes outside of it (prop pattern).
+  if (color !== derivedColor) {
+    setDerivedColor(color)
     setHex(u32ToHex(color))
-  }, [color])
+  }
 
   const commitHex = () => {
     const parsed = hexToU32(hex)

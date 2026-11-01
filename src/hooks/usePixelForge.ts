@@ -129,7 +129,7 @@ export function usePixelForge() {
         // Pointer already inactive; moves just won't be captured.
       }
     },
-    [cellAt, color, paintAt, syncHistory, finishStroke, tool],
+    [cellAt, color, paintAt, render, syncHistory, finishStroke, tool],
   )
 
   const onPointerMove = useCallback(
